@@ -1,16 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Weather-Forecast</title>
     <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body>
-    <h1 class="bg-indigo-500 text-3xl text-white text-center m-3 py-2">Weather Forecast</h1>
-    <div id="input-div" >
-        <input type="text" />
-        <button>Search</button>
+  </head>
+  <body>
+    <h1 class="bg-indigo-500 text-3xl text-white text-center m-3 py-2">
+      Weather Forecast
+    </h1>
+    <div id="input-div" class="flex justify-center gap-3 p-4">
+      <input
+        id="search-place"
+        type="text"
+        class="border rounded focus outline-none pl-1.5"
+      />
+      <button
+        id="search-btn"
+        class="bg-indigo-400 rounded px-1 py-0.5 text-white hover:bg-indigo-300"
+      >
+        Search
+      </button>
     </div>
-</body>
+    <div id="currentWeather" class="bg-white p-6 rounded-lg shadow-md mb-6">
+      <h2 class="text-2xl font-semibold mb-4">Current Weather</h2>
+      <div class="flex items-center">
+        <img
+          id="currentIcon"
+          src=""
+          alt="Weather Icon"
+          class="w-16 h-16 mr-4"
+        />
+        <div>
+          <p id="cityName" class="text-xl font-medium"></p>
+          <p id="temperature" class="text-lg"></p>
+          <p id="description" class="text-gray-600"></p>
+          <p id="humidity" class="text-gray-600"></p>
+          <p id="wind" class="text-gray-600"></p>
+        </div>
+      </div>
+    </div>
+  </body>
+
+  <script>
+    const API_KEY = "83688fade7434c76c4780c58d13fdb6d";
+    const cityInput = document.getElementById("search-place");
+    const searchBtn = document.getElementById("search-btn");
+
+    async function searchWeatherByCity(city) {
+      try {
+        const currentResponse = await fetch(
+          `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`
+        );
+
+        if (!currentResponse.ok) throw new Error("City not found");
+        const currentData = await currentResponse.json();
+
+        displayCurrentWeather(currentData);
+      } catch (error) {
+        throw new Error("Error finding data");
+      }
+    }
+
+    function displayCurrentWeather(data) {
+      console.log(data);
+      document.getElementById(
+        "cityName"
+      ).textContent = `${data.name}, ${data.sys.country}`;
+      document.getElementById(
+        "temperature"
+      ).textContent = `Temperature: ${Math.round(data.main.temp)}°C`;
+      document.getElementById(
+        "description"
+      ).textContent = `Condition: ${data.weather[0].description}`;
+      document.getElementById(
+        "humidity"
+      ).textContent = `Humidity: ${data.main.humidity}%`;
+      document.getElementById(
+        "wind"
+      ).textContent = `Wind: ${data.wind.speed} m/s`;
+      document.getElementById(
+        "currentIcon"
+      ).src = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
+    }
+
+    searchBtn.addEventListener("click", () => {
+      const city = cityInput.value.trim();
+      if (city) searchWeatherByCity(city);
+      console.log(city);
+    });
+  </script>
 </html>
