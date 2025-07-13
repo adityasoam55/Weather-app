@@ -1,4 +1,4 @@
-# 🌤️ Weather Forecast App
+# 🌤️ Weather Forecast App - https://github.com/adityasoam55/Weather-app
 
 A clean and responsive weather forecast app built with **HTML**, **Tailwind CSS**, and **JavaScript**. It fetches real-time weather data and a 5-day forecast using the **OpenWeatherMap API**. Includes a recent search dropdown feature stored in local storage.
 
