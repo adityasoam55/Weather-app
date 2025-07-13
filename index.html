@@ -52,22 +52,24 @@
         <!-- Current Weather -->
         <div
           id="currentWeather"
-          class="bg-white p-6 rounded-lg shadow-md mb-6 hidden"
+          class="bg-indigo-300 opacity-75 text-white p-6 rounded-lg shadow-md mb-6 hidden"
         >
-          <h2 class="text-2xl font-semibold mb-4">Current Weather</h2>
-          <div class="flex items-center">
-            <img
-              id="currentIcon"
-              src=""
-              alt="Weather Icon"
-              class="w-16 h-16 mr-4"
-            />
+          <h2 class="text-2xl font-semibold mb-4 text-center">Current Weather</h2>
+          <div class="flex items-center justify-evenly">
             <div>
               <p id="cityName" class="text-xl font-medium"></p>
               <p id="temperature" class="text-lg"></p>
-              <p id="description" class="text-gray-600"></p>
-              <p id="humidity" class="text-gray-600"></p>
-              <p id="wind" class="text-gray-600"></p>
+              <p id="humidity" ></p>
+              <p id="wind" ></p>
+            </div>
+            <div class="flex flex-col items-center">
+              <img
+                id="currentIcon"
+                src=""
+                alt="Weather Icon"
+                class="w-28 h-28 "
+              />
+              <p id="description" class="text-gray-800 -mt-6"></p>
             </div>
           </div>
         </div>

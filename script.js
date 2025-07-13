@@ -104,7 +104,7 @@ function displayCurrentWeather(data) {
   ).textContent = `Temperature: ${Math.round(data.main.temp)}°C`;
   document.getElementById(
     "description"
-  ).textContent = `Condition: ${data.weather[0].description}`;
+  ).textContent = `${data.weather[0].description}`;
   document.getElementById(
     "humidity"
   ).textContent = `Humidity: ${data.main.humidity}%`;
@@ -112,6 +112,7 @@ function displayCurrentWeather(data) {
   document.getElementById(
     "currentIcon"
   ).src = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
+
   currentWeatherDiv.classList.remove("hidden");
 }
 
@@ -135,6 +136,8 @@ function displayForecast(data) {
       }.png" alt="Weather Icon" class="mx-auto w-12 h-12">
       <p>${Math.round(day.main.temp)}°C</p>
       <p class="text-sm text-gray-600">${day.weather[0].description}</p>
+      <p class="text-xs text-gray-500">Wind: ${day.wind.speed} m/s</p>
+      <p class="text-xs text-gray-500">Humidity: ${day.main.humidity}%</p>
     `;
     forecastContainer.appendChild(dayDiv);
   });
